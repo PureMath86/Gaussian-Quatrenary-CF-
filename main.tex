@@ -1,0 +1,178 @@
+\documentclass{article}[12pt]
+
+
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\textwidth}{6in}
+\setlength{\topmargin}{-0.25in}
+
+\setlength{\headheight}{0.3in}
+\setlength{\headsep}{0.2in}
+
+\setlength{\textheight}{9in}
+\setlength{\footskip}{0.1in}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[latin1]{inputenc}
+\usepackage{verbatim}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{comment}
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usetikzlibrary{shapes,decorations,trees}
+
+
+
+% Define box and box title style
+\tikzstyle{mybox} = [draw=red, fill=blue!20, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{fancytitle} =[fill=red, text=white]
+\tikzstyle{defnbox} = [draw=blue, fill=red!20, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{fancydefn} =[fill=blue, text=white]
+
+% Define (boxed) theorem
+\newenvironment{thm}[2]{
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{\textwidth}
+#2
+    \end{minipage}
+};
+\node[fancytitle, rounded corners, right=12pt] at (box.north west) {#1};
+\end{tikzpicture}%
+}
+
+% Define (boxed) definition
+\newenvironment{defn}[2]{
+\begin{tikzpicture}
+\node [defnbox] (box){%
+    \begin{minipage}{\textwidth}
+#2
+    \end{minipage}
+};
+\node[fancydefn, rounded corners, right=12pt] at (box.north west) {#1};
+\end{tikzpicture}%
+}
+
+
+
+
+
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem*{example}{Example}
+\newtheorem*{definition}{Definition}
+\newtheorem*{remark}{Remark}
+\newtheorem*{caveat}{Caveat}
+\newtheorem*{motivation}{Motivation}
+
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\De}{\Delta}
+
+\newcommand{\K}{\mathop{\raisebox{-5pt}{\huge \textnormal{K}}}}
+
+\newcommand{\fold}{\mathop{\raisebox{-0.2ex}{\huge $\between$}}}
+
+\newcommand{\cfplus}{\raisebox{-6pt}{$+$}}
+\newcommand{\cfminus}{\raisebox{-6pt}{$-$}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\UH}{\mathbb{H}}
+\newcommand{\Cc}{\hat{\mathbb{C}}}
+
+\newcommand{\M}{\mathcal{M}}
+
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\onehalfspacing
+\begin{document}
+
+\makeatletter	   % `@' is now a normal "letter' for LaTeX
+\renewcommand{\ps@plain}{%
+     \renewcommand{\@oddhead}{\textrm{Arnold}\hfil\textrm{\thepage}}% 
+     \renewcommand{\@evenhead}{\@oddhead}%
+     \renewcommand{\@oddfoot}{}% empty footer
+     \renewcommand{\@evenfoot}{\@oddfoot}}
+\makeatother     % `@' is restored as a "non-letter" character
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Example of a Purely Periodic \\ Quatrenary Continued Fraction Over $\Z[i]$ }        
+\author{Bryan Arnold}               
+\maketitle
+
+\pagestyle{plain}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Let $\al = \sqrt[4]{2+i}$ be the principal root. And let $\tau = 1+\al+\al^2+\al^3$ (nearly $5.38912+1.10811 i$). Then
+$$
+\begin{tikzpicture}
+\tikzset{grow'=right,level distance=60pt}
+\tikzset{execute at begin node=\strut}
+\tikzset{every tree node/.style={anchor=base west}}
+\Tree 
+[.$\tau=4$ [.$6+6i$ [.$8i$ [.$-2+2i$ ] [.$4$  [.$\dots$ ] [.$\dots$ ] ] ] [.$4$ [.$6+6i$ [.$\dots$ ] [.$\dots$ ] ] [.$4$  [.$\dots$ ] [.$\dots$ ] ] ] ]
+[.$4$ [.$6+6i$ [.$8i$ [.$-2+2i$ ] [.$\dots$ ] ] [.$4$  [.$\dots$ ] [.$\dots$ ] ] ]
+[.$4$ [.$6+6i$ [.$\dots$ ] [.$\dots$ ] ]
+[.$4$ [.$\dots$ ] [.$\dots$ ] ] ] ] ]
+\end{tikzpicture}
+$$
+where we denote
+$$
+\begin{tikzpicture}
+\tikzset{grow'=right,level distance=55pt}
+\tikzset{execute at begin node=\strut}
+\tikzset{every tree node/.style={anchor=base west}}
+\Tree 
+[.$p+\cfrac{q}{r}=p$ [.$q$ ] [.$r$ ] ]
+\end{tikzpicture}
+.$$
+More precisely, we have $A_n/D_n \to \tau$ as $n \to \infty$, where
+$$
+\begin{pmatrix}
+A_n \\
+B_n \\
+C_n \\
+D_n  
+\end{pmatrix}
+=
+\begin{pmatrix}
+4 & 1 & 0 & 0 \\
+6+6i & 0 & 1 & 0 \\
+8i & 0 & 0 & 1 \\
+1 & 0 & 0 & 0 
+\end{pmatrix}
+\begin{pmatrix}
+4 & 1 & 0 & 0 \\
+6+6i & 0 & 1 & 0 \\
+8i & 0 & 0 & 1 \\
+-2+2i & 0 & 0 & 0 
+\end{pmatrix}^n
+\begin{pmatrix}
+1 \\
+0 \\
+0 \\
+0 
+\end{pmatrix}.
+$$
+
+\end{document}
